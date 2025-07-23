@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Contato - Meu Blog Pessoal{% endblock %}
+
+{% block content %}
+    <h1>Entre em Contato</h1>
+
+    {% if mensagem_enviada %}
+        <div class="alerta sucesso">
+            <p>Obrigado! Sua mensagem foi recebida.</p>
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('contato') }}" class="form-contato">
+        <div class="form-grupo">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-grupo">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-grupo">
+            <label for="assunto">Assunto:</label>
+            <input type="text" id="assunto" name="assunto">
+        </div>
+        <div class="form-grupo">
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="botao">Enviar Mensagem</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo_customizado }} - Meu Blog Pessoal{% endblock %}
+
+{% block content %}
+    <h1>Artigos na Categoria: "{{ categoria_atual.capitalize() }}"</h1>
+
+    {% if artigos %}
+        <div class="lista-artigos">
+            {% for artigo in artigos %}
+                <article class="artigo-item">
+                    <h2><a href="{{ url_for('exibir_artigo', artigo_id=artigo.id) }}">{{ artigo.titulo }}</a></h2>
+                    <p class="artigo-meta">
+                        Publicado em: {{ artigo.date.strftime('%d/%m/%Y às %H:%M') }} | 
+                        Categoria: <a href="{{ url_for('exibir_categoria', nome_categoria=artigo.categoria.lower()) }}">{{ artigo.categoria }}</a>
+                    </p>
+                    <p class="artigo-resumo">{{ artigo.conteudo_curto }}</p>
+                    <a href="{{ url_for('exibir_artigo', artigo_id=artigo.id) }}" class="leia-mais">Leia mais &rarr;</a>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Não há artigos publicados nesta categoria no momento.</p>
+    {% endif %}
+
+    <hr>
+    <p><a href="{{ url_for('pagina_inicial') }}">&larr; Voltar para todos os artigos</a></p>
+{% endblock %}

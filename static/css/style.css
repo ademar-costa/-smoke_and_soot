@@ -1,0 +1,233 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4; /* uma cinza bem claro para o fundo */
+    color: #333; /* Cor de texto principal escura*/
+}
+
+/* Ajuste no container para não ficar colado no header */
+.container {
+    /* margin-top: 20px; foi removido pois o header já tem margin-bottom */
+    max-width: 800px; 
+    margin: 0 auto 20px auto; /* Ajusta a margem para 0 em cima, auto dos lados, 20px em baixo */
+    padding: 20px;
+    background-color: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+h1 {
+    color: #2c3e50; /* Um azul mais escuro para o título principal */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* Estilos para o Cabeçalho e Navegação */
+.site-header {
+    background-color: #2c3e50; /* Azul escuro do h1 */
+    padding: 10px 20px;
+    color: #ecf0f1; /* Cinza claro para texto */
+    margin-bottom: 20px; /* Espaço antes do container principal */
+}
+
+.main-nav {
+    display: flex; /* Alinha itens horizontalmente */
+    justify-content: space-between; /* Espaça o logo e a lista de links */
+    align-items: center; /* Centraliza verticalmente */
+    max-width: 900px; /* Um pouco mais largo que o .container */
+    margin: 0 auto; /* Centraliza a navegação */
+}
+
+.nav-logo {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.main-nav ul {
+    list-style-type: none; /* Remove marcadores da lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Alinha os itens da lista horizontalmente */
+}
+
+.main-nav ul li {
+    margin-left: 20px; /* Espaçamento entre os links */
+}
+
+.main-nav ul li a {
+    color: #ecf0f1;
+    text-decoration: none; /* Remove sublinhado dos links */
+    font-size: 1.1em;
+}
+
+.main-nav ul li a:hover {
+    color: #bdc3c7; /* Cor um pouco mais clara ao passar o mouse */
+}
+
+/* Estilos para a Lista de Artigos */
+.lista-artigos {
+    margin-top: 30px;
+}
+
+.artigo-item {
+    background-color: #fdfdfd; /* Um branco levemente diferente do container */
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.artigo-item h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.8em;
+    color: #34495e; /* Um azul acinzentado */
+}
+
+.artigo-item h2 a {
+    text-decoration: none;
+    color: inherit; /* Herda a cor do h2 */
+}
+
+.artigo-item h2 a:hover {
+    color: #2980b9; /* Um azul mais vivo no hover */
+    text-decoration: underline;
+}
+
+.artigo-meta {
+    font-size: 0.9em;
+    color: #7f8c8d; /* Cinza para metadados */
+    margin-bottom: 15px;
+}
+
+.artigo-resumo {
+    font-size: 1em;
+    line-height: 1.7;
+    color: #555;
+}
+
+.leia-mais {
+    display: inline-block; /* Para poder aplicar padding e margin */
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #2980b9; /* Azul */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.leia-mais:hover {
+    background-color: #3498db; /* Azul mais claro no hover */
+}
+
+/* Estilos para a Página de Artigo Completo */
+.artigo-detalhe {
+    padding-bottom: 20px; /* Espaço antes do rodapé/link de voltar */
+}
+
+.artigo-detalhe h1 {
+    font-size: 2.5em; /* Título maior na página do artigo */
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: left; /* Alinhamento padrão para o título do artigo */
+}
+
+.artigo-detalhe .artigo-meta {
+    margin-bottom: 25px; /* Mais espaço após os metadados */
+    font-size: 0.95em;
+}
+
+.artigo-conteudo {
+    font-size: 1.1em; /* Fonte um pouco maior para leitura */
+    line-height: 1.8;
+    color: #34495e; /* Cor de texto um pouco mais escura */
+}
+
+.artigo-conteudo p,
+.artigo-conteudo ul,
+.artigo-conteudo ol {
+    margin-bottom: 20px;
+}
+
+.artigo-conteudo ul,
+.artigo-conteudo ol {
+    margin-left: 20px;
+}
+
+.artigo-conteudo a {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.artigo-conteudo a:hover {
+    color: #3498db;
+}
+
+/* Estilos para Formulários */
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-grupo input[type="text"],
+.form-grupo input[type="email"],
+.form-grupo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Para o padding não aumentar a largura total */
+    font-size: 1em;
+}
+
+.form-grupo textarea {
+    resize: vertical; /* Permite redimensionamento vertical apenas */
+}
+
+.botao, button[type="submit"] { /* Estiliza o botão de submit */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2980b9; /* Azul que já usamos */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.botao:hover, button[type="submit"]:hover {
+    background-color: #3498db; /* Azul mais claro no hover */
+}
+
+/* Alertas */
+.alerta {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alerta.sucesso {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}

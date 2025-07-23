@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu Blog Pessoal{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="{{ url_for('pagina_inicial') }}" class="nav-logo">Smoke and Stack</a>
+            <ul>
+                <li><a href="{{ url_for('pagina_inicial') }}">Início</a></li>
+                <li><a href="{{ url_for('sobre') }}">Sobre Mim</a></li>
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; {{ now.year }} Ademar de Olivera Costa Neto. Todos os direitos reservados.</p>
+        <p>Feito com Flask!</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

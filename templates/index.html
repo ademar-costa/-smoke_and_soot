@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo_customizado }}{% endblock %}
+
+{% block content %}
+    <h1>Últimas Publicações</h1>
+
+    {% if artigos %}
+    <div class="lista-artigos">
+        {% for artigo in artigos %}
+            <article class="artigo-item">
+                <h2><a href="{{ url_for('exibir_artigo', slug_artigo=artigo.slug) }}">{{ artigo.title }}</a></h2>
+                <p class="artigo-meta">
+                    Publicado em: {{ artigo.date.strftime('%d/%m/%Y às %H:%M') }} | 
+                    Categoria: {{ artigo.category }}
+                </p>
+                <p class="artigo-resumo">{{ artigo.resumo }}</p>
+                <a href="{{ url_for('exibir_artigo', slug_artigo=artigo.slug) }}" class="leia-mais">Leia mais &rarr;</a>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+        <p>Ainda não há artigos publicados. Volte em breve!</p>
+    {% endif %}
+{% endblock %}
