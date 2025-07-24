@@ -26,3 +26,7 @@
     <hr>
     <p><a href="{{ url_for('pagina_inicial') }}">&larr; Voltar para todos os artigos</a></p>
 {% endblock %}
+
+{% block content_footer %}
+  {% include 'paginacao.html' %}
+{% endblock %}

@@ -231,3 +231,59 @@ p {
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
+/* Estilos para a Paginação */
+.navegacao-paginas {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.paginacao {
+    display: inline-flex;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.item-pagina span,
+.link-pagina {
+    display: block;
+    padding: 10px 15px;
+    color: #2980b9;
+    border: 1px solid #ddd;
+    border-left: none;
+}
+
+.item-pagina:first-child span,
+.item-pagina:first-child .link-pagina {
+    border-left: 1px solid #ddd;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.item-pagina:last-child span,
+.item-pagina:last-child .link-pagina {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.link-pagina {
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.link-pagina:hover {
+    background-color: #f5f5f5;
+}
+
+.item-pagina.ativo span {
+    background-color: #2980b9;
+    color: white;
+    border-color: #2980b9;
+    font-weight: bold;
+}
+
+.item-pagina.desabilitado span {
+    color: #777;
+    background-color: #f9f9f9;
+}

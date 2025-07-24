@@ -1,3 +1,4 @@
+import math
 from flask import Flask, render_template, abort, request 
 from datetime import datetime, timezone
 import os # Para interagir com o sistema de arquivos
@@ -7,6 +8,7 @@ from markdown import markdown # Para converter Markdown para HTML
 
 app = Flask(__name__)
 PASTA_POSTS = 'meus_posts' # Define o nome da pasta dos posts
+ARTIGOS_POR_PAGINA = 5 # Defina quantos artigos você quer por página
 
 def carregar_artigos():
     lista_de_artigos = []
@@ -43,14 +45,26 @@ def carregar_artigos():
 
 @app.route('/')
 def pagina_inicial():
+    # Pega o número da página da URL (ex: /?page=2). Padrão é 1.
+    pagina = request.args.get('page', 1, type=int)
+
     artigos_carregados = carregar_artigos() # Carrega os artigos dinamicamente
+
+    # Lógica de paginação
+    total_artigos = len(artigos_carregados)
+    inicio = (pagina - 1) * ARTIGOS_POR_PAGINA
+    fim = inicio + ARTIGOS_POR_PAGINA
+    artigos_para_pagina = artigos_carregados[inicio:fim] # Fatiando a lista de artigos
+    total_paginas = math.ceil(total_artigos / ARTIGOS_POR_PAGINA)
     # Vamos criar algumas variáveis para enviar ao template
     titulo_da_pagina = "Smoke and Stack"
 
     return render_template('index.html',
                            titulo_customizado=titulo_da_pagina, 
                            artigos=artigos_carregados, # Enviando os artigos
-                           now=datetime.now(timezone.utc)) # Passe o datetime atual
+                           now=datetime.now(timezone.utc), # Passe o datetime atual
+                           pagina_atual=pagina, # Passa o número da página atual
+                           total_paginas=total_paginas) # Passa o total de páginas
 
 # Nova rota para a página "Sobre Mim"
 @app.route('/sobre')
@@ -79,16 +93,27 @@ def exibir_artigo(slug_artigo):
 
 @app.route('/categoria/<string:nome_categoria>')
 def exibir_categoria(nome_categoria):
+    pagina = request.args.get('page', 1, type=int)
+
     artigos_carregados = carregar_artigos()
-    artigos_da_categoria = [
+    artigos_da_categoria_todos = [
         artigo for artigo in artigos_carregados if artigo['category'].lower() == nome_categoria.lower()
     ]
+
+    # Lógica de paginação aplicada à lista filtrada
+    total_artigos = len(artigos_da_categoria_todos)
+    inicio = (pagina - 1) * ARTIGOS_POR_PAGINA
+    fim = inicio + ARTIGOS_POR_PAGINA
+    artigos_para_pagina = artigos_da_categoria_todos[inicio:fim]
+    total_paginas = math.ceil(total_artigos / ARTIGOS_POR_PAGINA)
 
     return render_template('categoria_artigos.html',
                            titulo_customizado=f"Categoria: {nome_categoria.capitalize()}",
                            categoria_atual=nome_categoria,
-                           artigos=artigos_da_categoria,
-                           now=datetime.now(timezone.utc))
+                           artigos=artigos_para_pagina, # Lista fatiada
+                           now=datetime.now(timezone.utc),
+                           pagina_atual=pagina, # Página atual
+                           total_paginas=total_paginas) # Total de páginas
 
 @app.route('/contato', methods=['GET', 'POST'])
 def contato():
