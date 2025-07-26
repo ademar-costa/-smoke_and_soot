@@ -1,3 +1,4 @@
+from flask_sqlalchemy import SQLAlchemy # poderemos usar objetos Python para interagir com o banco de dados
 import math
 from flask import Flask, render_template, abort, request 
 from datetime import datetime, timezone
@@ -10,13 +11,21 @@ app = Flask(__name__)
 PASTA_POSTS = 'meus_posts' # Define o nome da pasta dos posts
 ARTIGOS_POR_PAGINA = 5 # Defina quantos artigos você quer por página
 
+# CONFIGURAÇÃO DO BANCO DE DADOS 
+# Define o caminho para o arquivo do banco de dados
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db' # "Nosso banco de dados é do tipo SQLite e o arquivo que o armazena se chamará blog.db e ficará na pasta principal do nosso projeto"
+# Desativa um recurso do SQLAlchemy que não usaremos e que consome recursos
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Cria uma instância do SQLAlchemy, conectando-a ao nosso app Flask
+db = SQLAlchemy(app) # Aqui criamos o objeto db, que será nossa principal ferramenta para interagir com o banco de dados. Associei ao aplicativo app.
+
 def carregar_artigos():
     lista_de_artigos = []
     arquivos_md = [f for f in os.listdir(PASTA_POSTS) if f.endswith('.md')]
 
     for nome_arquivo in arquivos_md:
         caminho_completo = os.path.join(PASTA_POSTS, nome_arquivo)
-        artigo_fm = frontmatter.load(caminho_completo) # Carrega frontmatter e conteúdo
+        artigo_fm = frontmatter.load(caminho_completo) # Carrega frontmatter e o conteúdo
 
         # Converte a string da data do frontmatter para um objeto datetime
         # Isso é importante para ordenação e formatação consistente
